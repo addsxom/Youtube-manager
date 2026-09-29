@@ -1,0 +1,62 @@
+.workspace-expanded {
+  min-height: calc(100dvh - 4px);
+}
+
+.workspace-expanded > * {
+  width: 100% !important;
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Dashboard, Analyse et Paramètres utilisent déjà un layout flex plein écran.
+   On leur rend simplement la hauteur libérée par la suppression de la grosse barre. */
+.workspace-expanded > .flex {
+  height: calc(100dvh - 40px) !important;
+}
+
+@keyframes action-feedback-toast {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(.97);
+  }
+  7% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  88% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(10px) scale(.985);
+  }
+}
+
+/* Notifications de confirmation (désabonnement / nettoyage). */
+.fixed.bottom-6.right-6.z-\[70\] {
+  animation: action-feedback-toast 5.5s cubic-bezier(.2,.8,.2,1) both;
+  transform-origin: bottom right;
+}
+
+/* Navigation entre plusieurs chaînes superposées dans la matrice.
+   Le groupe reste centré par rapport au drawer de 560 px. */
+.fixed:has(> button[aria-label="Chaîne précédente au même point"]):has(> button[aria-label="Chaîne suivante au même point"]) {
+  right: 12px !important;
+  width: 560px;
+  justify-content: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fixed.bottom-6.right-6.z-\[70\] {
+    animation: none;
+  }
+}
+
+@media (min-width: 1500px) {
+  .workspace-expanded {
+    padding-left: 26px !important;
+    padding-right: 26px !important;
+  }
+}

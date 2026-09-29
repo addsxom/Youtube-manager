@@ -1,0 +1,57 @@
+:root {
+  --text-primary: #f7f8fb;
+  --text-secondary: #aab3c2;
+  --text-muted: #6f798c;
+  --status-good: #42dea0;
+  --status-mid: #f3be5d;
+  --status-bad: #ff667d;
+  --avatar-border: rgba(255, 255, 255, .09);
+  --avatar-bg-a: #1c2330;
+  --avatar-bg-b: #11151c;
+}
+
+html[data-app-style='liquid'] {
+  --text-secondary: #b9c7dd;
+  --text-muted: #8290a7;
+  --avatar-bg-a: #263247;
+  --avatar-bg-b: #151d2a;
+}
+
+html[data-app-style='glass'] {
+  --text-secondary: #b6c7d8;
+  --text-muted: #7890a4;
+  --avatar-bg-a: #173044;
+  --avatar-bg-b: #0c1d2a;
+}
+
+html[data-app-style='youtube'] {
+  --text-secondary: #b7b7b7;
+  --text-muted: #7d7d7d;
+  --avatar-bg-a: #2a2a2a;
+  --avatar-bg-b: #171717;
+}
+
+html[data-app-style='material'] {
+  --text-secondary: #d0bdc4;
+  --text-muted: #927f86;
+  --avatar-bg-a: #352c32;
+  --avatar-bg-b: #211b20;
+}
+
+html[data-app-style='cyber'] {
+  --text-secondary: #c9b8d8;
+  --text-muted: #887899;
+  --avatar-bg-a: #241331;
+  --avatar-bg-b: #0c0b15;
+}
+
+html[data-app-style='mono'] {
+  --text-primary: #f4f4f4;
+  --text-secondary: #c5c5c5;
+  --text-muted: #858585;
+  --status-good: #f0f0f0;
+  --status-mid: #bcbcbc;
+  --status-bad: #888888;
+  --avatar-bg-a: #2b2b2b;
+  --avatar-bg-b: #111111;
+}

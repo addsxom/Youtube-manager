@@ -1,0 +1,102 @@
+html[data-app-style='frost'] {
+  --app-bg:
+    radial-gradient(circle at 82% -8%, rgba(91, 170, 211, .19), transparent 33%),
+    radial-gradient(circle at 12% 108%, rgba(79, 209, 197, .08), transparent 31%),
+    linear-gradient(180deg, #091018, #0d151f 52%, #080e15);
+  --ambient-bg: linear-gradient(115deg, rgba(76, 132, 168, .18), rgba(130, 217, 245, .08));
+  --glass-bg: rgba(17, 28, 39, .91);
+  --glass-bg-strong: rgba(13, 23, 33, .97);
+  --glass-border: rgba(153, 205, 232, .105);
+  --glass-highlight: rgba(201, 231, 245, .055);
+  --glass-shadow: 0 16px 46px rgba(0, 0, 0, .31);
+  --panel-blur: 12px;
+  --soft-bg: rgba(130, 217, 245, .035);
+  --header-bg: rgba(11, 20, 29, .93);
+  --menu-bg: rgba(16, 27, 38, .98);
+  --field-bg: rgba(9, 17, 25, .95);
+  --button-bg: linear-gradient(180deg, rgba(130, 217, 245, .075), rgba(255, 255, 255, .025));
+  --button-hover: linear-gradient(180deg, rgba(130, 217, 245, .13), rgba(255, 255, 255, .04));
+  --primary-bg: linear-gradient(135deg, #4e8fb9, #82d9f5);
+  --primary-hover: linear-gradient(135deg, #60a1ca, #97e3fb);
+  --primary-text: #071117;
+  --accent: #82d9f5;
+  --accent-2: #6fd3c7;
+  --focus: rgba(130, 217, 245, .52);
+  --radius-panel: 15px;
+  --radius-control: 10px;
+  --text-secondary: #b7c9d4;
+  --text-muted: #748c9b;
+  --avatar-bg-a: #203747;
+  --avatar-bg-b: #101d27;
+}
+
+html[data-app-style='oled'] {
+  --app-bg:
+    radial-gradient(circle at 86% -10%, rgba(54, 211, 148, .095), transparent 30%),
+    linear-gradient(180deg, #010302, #040806 54%, #010302);
+  --ambient-bg: linear-gradient(115deg, rgba(66, 217, 156, .095), transparent 70%);
+  --glass-bg: rgba(7, 12, 10, .97);
+  --glass-bg-strong: rgba(5, 9, 7, .99);
+  --glass-border: rgba(116, 235, 186, .105);
+  --glass-highlight: rgba(255, 255, 255, .03);
+  --glass-shadow: 0 18px 46px rgba(0, 0, 0, .48);
+  --panel-blur: 4px;
+  --soft-bg: rgba(66, 217, 156, .035);
+  --header-bg: rgba(3, 7, 5, .98);
+  --menu-bg: rgba(8, 14, 11, .99);
+  --field-bg: rgba(4, 9, 7, .98);
+  --button-bg: #0c1511;
+  --button-hover: #112019;
+  --primary-bg: linear-gradient(135deg, #2fbf86, #55e0aa);
+  --primary-hover: linear-gradient(135deg, #3bd092, #69e9b7);
+  --primary-text: #03120c;
+  --accent: #42d99c;
+  --accent-2: #8af0c7;
+  --focus: rgba(66, 217, 156, .52);
+  --radius-panel: 12px;
+  --radius-control: 9px;
+  --text-primary: #f3fff9;
+  --text-secondary: #b6d8c9;
+  --text-muted: #668779;
+  --status-good: #42d99c;
+  --avatar-bg-a: #123125;
+  --avatar-bg-b: #07150f;
+}
+
+html[data-app-style='oled'] body::before {
+  opacity: .42;
+}
+
+/* Paramètres : 40 % pour l'état du système, 60 % pour les préférences. */
+[class*="grid-cols-[372px_minmax(0,1fr)]"] > div:first-child {
+  display: grid !important;
+  min-height: 0;
+  grid-template-rows: minmax(0, 2fr) minmax(0, 3fr) !important;
+  gap: 12px;
+}
+
+[class*="grid-cols-[372px_minmax(0,1fr)]"] > div:first-child > section {
+  min-height: 0;
+}
+
+[class*="grid-cols-[372px_minmax(0,1fr)]"] > div:first-child > section:first-child {
+  display: flex;
+  flex-direction: column;
+}
+
+[class*="grid-cols-[372px_minmax(0,1fr)]"] > div:first-child > section:first-child > .divide-y {
+  display: grid;
+  min-height: 0;
+  flex: 1 1 0%;
+  grid-template-rows: repeat(4, minmax(0, 1fr));
+}
+
+/* Retour au footer compact d'origine : aucune ligne de séparation sous le volume. */
+[class*="grid-cols-[372px_minmax(0,1fr)]"] > div:first-child > section:nth-child(2) > div:last-child {
+  border-top: 0 !important;
+}
+
+/* 12 thèmes = grille pleine de 4 rangées, sans cases vides. */
+[class*="grid-cols-[372px_minmax(0,1fr)]"] > section:last-child > .grid {
+  grid-template-rows: repeat(4, minmax(0, 1fr)) !important;
+}

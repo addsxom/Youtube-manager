@@ -1,0 +1,91 @@
+/*
+ * Correctifs de rendu communs aux 12 thèmes.
+ *
+ * Chromium peut afficher des rectangles / lignes de découpe quand plusieurs
+ * backdrop-filter transparents sont imbriqués (panneau -> champ/bouton -> icône).
+ * Le flou reste donc sur les grandes surfaces (panels, header, menus), tandis
+ * que les contrôles internes utilisent uniquement leur fond thémé.
+ */
+
+.btn,
+.icon-btn,
+.field,
+.glass-soft {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  background-clip: padding-box;
+  isolation: isolate;
+}
+
+/* Les grandes surfaces conservent leur effet verre, mais dans leur propre
+   contexte de rendu pour éviter que les calques internes se mélangent. */
+.panel,
+.liquid-glass,
+.glass-header,
+.glass-menu {
+  isolation: isolate;
+  background-clip: padding-box;
+}
+
+/* Les miniatures des thèmes sont volontairement translucides, mais leur
+   aperçu n'a pas besoin de recalculer un blur réel : cela évite les bandes
+   verticales visibles sur Liquid Glass / Glassmorphism / Discord / Material. */
+[class*="grid-cols-[372px_minmax(0,1fr)]"] > section:last-child > .grid > button,
+[class*="grid-cols-[372px_minmax(0,1fr)]"] > section:last-child > .grid > button > div:first-child {
+  isolation: isolate;
+  background-clip: padding-box;
+}
+
+[class*="grid-cols-[372px_minmax(0,1fr)]"] > section:last-child > .grid > button [class*="backdrop-blur"] {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Liquid Glass et Glassmorphism utilisaient un blur très fort sur le grand
+   panneau Style de l'application. Sous Chromium, ce panneau peut être découpé
+   en tuiles GPU et laisser une bande verticale visible à gauche. On garde le
+   rendu verre via le fond thémé, mais on évite le backdrop-filter uniquement
+   sur ce panneau et on force un seul contexte de composition. */
+html[data-app-style='liquid'] [class*="grid-cols-[372px_minmax(0,1fr)]"] > section:last-child,
+html[data-app-style='glass'] [class*="grid-cols-[372px_minmax(0,1fr)]"] > section:last-child {
+  overflow: hidden !important;
+  isolation: isolate !important;
+  contain: paint;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.028), transparent 34%),
+    var(--glass-bg) !important;
+  background-clip: padding-box !important;
+}
+
+html[data-app-style='liquid'] [class*="grid-cols-[372px_minmax(0,1fr)]"] > section:last-child > .grid,
+html[data-app-style='glass'] [class*="grid-cols-[372px_minmax(0,1fr)]"] > section:last-child > .grid {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+  transform: translateZ(0);
+}
+
+html[data-app-style='liquid'] [class*="grid-cols-[372px_minmax(0,1fr)]"] > section:last-child > .grid > button,
+html[data-app-style='glass'] [class*="grid-cols-[372px_minmax(0,1fr)]"] > section:last-child > .grid > button {
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Le glow SVG de la loupe créait lui aussi un petit calque rectangulaire sur
+   certains thèmes. La couleur d'accent suffit pour la garder bien visible. */
+form[class*="group/search"] svg {
+  filter: none !important;
+}
+
+/* Évite les coutures de rasterisation sur les contrôles translucides sans
+   toucher aux couleurs propres à chaque thème. */
+.btn,
+.icon-btn,
+.field {
+  outline-offset: 2px;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+}
